@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\PortalController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
@@ -16,6 +17,17 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// Portal web basico (mismo origen que la API -> cookies Sanctum sin CORS)
+Route::get('/login', [PortalController::class, 'login'])->name('login');
+
+Route::middleware('auth')->prefix('portal')->name('portal.')->group(function () {
+    Route::get('/', [PortalController::class, 'app'])->name('index');
+
+    Route::get('/{view}', [PortalController::class, 'app'])
+        ->where('view', 'dashboard|usuarios|roles|terceros|notificaciones')
+        ->name('view');
 });
 
 // Rutas de Sanctum para CSRF cookie (requiere middleware web)

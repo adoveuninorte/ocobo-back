@@ -37,6 +37,13 @@ storage/app/temp_files/*
 storage/framework/sessions/*
 storage/framework/views/*
 storage/framework/cache/*
+storage/framework/cache/data/*
+
+# Mantener la estructura de carpetas del framework en git
+!storage/framework/sessions/.gitignore
+!storage/framework/cache/.gitignore
+!storage/framework/cache/data/
+!storage/framework/cache/data/.gitignore
 storage/logs/*
 
 # Symlinks pÃºblicos que se regeneran con php artisan storage:link
@@ -64,7 +71,7 @@ bootstrap/cache/*.php
 storage/fonts/*.json
 storage/framework/cache/data/*
 
-# Artefactos de depuración/pruebas no deben committearse
+# Artefactos de depuraciï¿½n/pruebas no deben committearse
 cookies.txt
 debug*.php
 test_*.php
